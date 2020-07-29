@@ -31,4 +31,35 @@ class Market
     vendors_with_item
   end
 
+  def sorted_item_list
+    @item_names = Hash.new{ |hash, key| hash[key] = []}
+    @vendors.each do |vendor|
+      vendor.inventory.keys.each do |vendor_items|
+        if @item_names[vendor_items.name].nil?
+          @item_names[vendor_items.name] = vendor
+        else
+          x = {vendor_items.name => vendor}
+          @item_names.merge(x)
+        end
+      end
+    end
+    # Currently rewriting the vendors instead of adding
+    require "pry"; binding.pry
+    @item_names.keys.sort
+  end
+
+  def total_inventory
+    new = {}
+    sorted_item_list
+    @item_names.each do |market_items, vendor|
+      item_counter = 0
+      vendor.inventory.keys.each do |key|
+        if key.name == market_items
+          item_counter += vendor.inventory[key]
+        end
+      end
+      new[market_items] = item_counter, vendor
+    end
+  end
+
 end
