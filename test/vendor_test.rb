@@ -30,6 +30,7 @@ class VendorTest < Minitest::Test
     @vendor.stubs(:inventory).returns({peach:30})
     expected = {peach:30}
     assert_equal expected, @vendor.inventory
+    assert_equal 30, @vendor.check_stock(@item1)
   end
 
 end
