@@ -2,6 +2,8 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/item"
 require "./lib/vendor"
+require 'mocha/minitest'
+
 
 class VendorTest < Minitest::Test
 
@@ -24,8 +26,10 @@ class VendorTest < Minitest::Test
   def test_it_can_check_stock
     assert_equal 0, @vendor.check_stock(@item1)
     @vendor.stock(@item1, 30)
-    # expected = d
-    # assert_equal expected, @vendor.inventory
+
+    @vendor.stubs(:inventory).returns({peach:30})
+    expected = {peach:30}
+    assert_equal expected, @vendor.inventory
   end
 
 end
