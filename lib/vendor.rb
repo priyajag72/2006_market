@@ -15,7 +15,7 @@ class Vendor
     if @inventory.empty?
       0
     else
-      @inventory
+      @inventory[item]
     end
   end
 end
