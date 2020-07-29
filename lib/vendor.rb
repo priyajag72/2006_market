@@ -4,18 +4,18 @@ class Vendor
 
   def initialize(name)
     @name = name
-    @inventory = {}
+    @inventory = Hash.new{ |hash, key| hash[key] = 0}
+  end
+
+  def check_stock(item)
+    if @inventory.empty? || @inventory[item] == 0
+      return 0
+    else
+      @inventory[item]
+    end
   end
 
   def stock(item, quantity)
     @inventory[item] = quantity
-  end
-
-  def check_stock(item)
-    if @inventory.empty?
-      0
-    else
-      @inventory[item]
-    end
   end
 end
