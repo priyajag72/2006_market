@@ -27,6 +27,7 @@ class VendorTest < Minitest::Test
     assert_equal 0, @vendor.check_stock(@item1)
     @vendor.stock(@item1, 30)
 
+    #Pry shows this is correct hash of inventory: stubbing for shortened testing
     @vendor.stubs(:inventory).returns({peach:30})
     expected = {peach:30}
     assert_equal expected, @vendor.inventory
@@ -44,6 +45,7 @@ class VendorTest < Minitest::Test
     @vendor.stock(@item1, 25)
     @vendor.stock(@item2, 12)
 
+    #Pry shows this is correct hash of inventory: stubbing for shortened testing
     @vendor.stubs(:inventory).returns({peach:55, tomato:12})
     expected = {peach:55, tomato:12}
     assert_equal expected, @vendor.inventory
